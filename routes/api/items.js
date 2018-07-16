@@ -14,4 +14,18 @@ router.get('/', (req, res) => {
     .then(items => res.json(items));
 });
 
+// @route POST api/items
+// @desc Post an item
+// @access Public
+router.post('/', (req, res) => {
+  // construct an aboject to insert into the database
+  // name is going to be in the body of the request
+  // date will be automatically inserted
+  const newItem = new Item({
+    name: req.body.name
+  });
+
+  newItem.save().then(item => res.json(item));
+});
+
 module.exports = router;
