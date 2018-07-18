@@ -18,14 +18,27 @@ router.get('/', (req, res) => {
 // @desc Post an item
 // @access Public
 router.post('/', (req, res) => {
-  // construct an aboject to insert into the database
-  // name is going to be in the body of the request
-  // date will be automatically inserted
   const newItem = new Item({
     name: req.body.name
   });
 
   newItem.save().then(item => res.json(item));
+});
+
+// @route DELETE api/items/:id
+// @desc Delete an item
+// @access Public
+router.delete('/:id', (req, res) => {
+  // this will fetch it by the URI
+  Item.findById(req.params.id)
+    .then(item =>
+      item.remove().then(
+        () => res.json({ success: true })
+        // we want to send a response, but not a res.json() - 200 ok
+        // but a 404 for not found
+      )
+    )
+    .catch(err => res.status(404).json({ success: false }));
 });
 
 module.exports = router;
