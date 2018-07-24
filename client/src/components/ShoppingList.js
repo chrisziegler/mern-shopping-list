@@ -8,7 +8,7 @@ import {
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
 
-export class ShoppingList extends Component {
+export class ShopListBak extends Component {
   state = {
     items: [
       { id: uuid(), name: 'Eggs' },
@@ -17,21 +17,30 @@ export class ShoppingList extends Component {
       { id: uuid(), name: 'Water' }
     ]
   };
+
+  addItem = () => {
+    const name = prompt('Enter Item');
+    if (name) {
+      this.setState(state => ({
+        items: [...state.items, { id: uuid(), name }]
+      }));
+    }
+  };
+
+  removeItem = id => {
+    this.setState(state => ({
+      items: state.items.filter(item => item.id !== id)
+    }));
+  };
+
   render() {
     const { items } = this.state;
     return (
       <Container>
         <Button
           color="dark"
-          style={{ margingBottom: '2rem' }}
-          onClick={() => {
-            const name = prompt('Enter Item');
-            if (name) {
-              this.setState(state => ({
-                items: [...state.items, { id: uuid(), name }]
-              }));
-            }
-          }}
+          style={{ marginBottom: '2rem' }}
+          onClick={this.addItem}
         >
           Add Item
         </Button>
@@ -44,13 +53,7 @@ export class ShoppingList extends Component {
                     color="danger"
                     className="remove-btn mr-3"
                     size="sm"
-                    onClick={() => {
-                      this.setState(state => ({
-                        items: state.items.filter(
-                          item => item.id !== id
-                        )
-                      }));
-                    }}
+                    onClick={() => this.removeItem(id)}
                   >
                     &times;
                   </Button>
@@ -65,4 +68,4 @@ export class ShoppingList extends Component {
   }
 }
 
-export default ShoppingList;
+export default ShopListBak;
