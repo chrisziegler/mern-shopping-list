@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Button
-} from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
 
@@ -37,11 +32,7 @@ export class ShopListBak extends Component {
     const { items } = this.state;
     return (
       <Container>
-        <Button
-          color="dark"
-          style={{ marginBottom: '2rem' }}
-          onClick={this.addItem}
-        >
+        <Button color="dark" style={{ marginBottom: '2rem' }} onClick={this.addItem}>
           Add Item
         </Button>
         <ListGroup>
